@@ -22,6 +22,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/container2"
         app:layout_constraintTop_toBottomOf="@id/button" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container2"
+        android:name="com.flywith24.wrapperlivedatademo.Content2Fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

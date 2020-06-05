@@ -1,10 +1,7 @@
 package com.flywith24.wrapperlivedatademo.common
 
 import androidx.annotation.MainThread
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 
 /**
  * @author Flywith24
@@ -19,15 +16,28 @@ typealias EventMutableLiveData<T> = MutableLiveData<Event<T>>
 typealias EventLiveData<T> = LiveData<Event<T>>
 
 @MainThread
+inline fun <T> EventLiveData<T>.observeSingleEvent(
+    owner: LifecycleOwner,
+    viewModelStore: ViewModelStore,
+    crossinline onChanged: (T) -> Unit
+): Observer<Event<T>> {
+    val wrappedObserver = Observer<Event<T>> { t ->
+        //数据没有被使用过则发送给调用者，否则不处理
+        t.getContentIfNotHandled(viewModelStore)?.let { data ->
+            onChanged.invoke(data)
+        }
+    }
+    observe(owner, wrappedObserver)
+    return wrappedObserver
+}
+
+@MainThread
 inline fun <T> EventLiveData<T>.observeEvent(
     owner: LifecycleOwner,
     crossinline onChanged: (T) -> Unit
 ): Observer<Event<T>> {
     val wrappedObserver = Observer<Event<T>> { t ->
-        //数据没有被使用过则发送给调用者，否则不处理
-        t.getContentIfNotHandled()?.let { data ->
-            onChanged.invoke(data)
-        }
+        onChanged.invoke(t.peekContent())
     }
     observe(owner, wrappedObserver)
     return wrappedObserver

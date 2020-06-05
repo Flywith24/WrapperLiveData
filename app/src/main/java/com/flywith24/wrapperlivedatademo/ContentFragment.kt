@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import com.flywith24.wrapperlivedatademo.common.RequestState
-import com.flywith24.wrapperlivedatademo.common.observeEvent
+import com.flywith24.wrapperlivedatademo.common.observeSingleEvent
 import com.flywith24.wrapperlivedatademo.common.observeState
 import kotlinx.android.synthetic.main.fragment_content.*
 
@@ -36,8 +35,9 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
         }
-        mSharedViewModel.eventContent.observeEvent(viewLifecycleOwner) { value ->
+        mSharedViewModel.eventContent.observeSingleEvent(viewLifecycleOwner,viewModelStore) { value ->
             event.isChecked = value
+            Log.i("yyz11", "ContentFragment eventContent $value")
             val toast = Toast.makeText(requireContext(), "event value $value", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.BOTTOM, 0, 0)
             toast.show()
