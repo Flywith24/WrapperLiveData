@@ -32,3 +32,11 @@ inline fun <T> EventLiveData<T>.observeEvent(
     observe(owner, wrappedObserver)
     return wrappedObserver
 }
+
+fun <T> EventMutableLiveData<T>.postEventValue(value: T) {
+    postValue(Event(value))
+}
+
+fun <T> EventMutableLiveData<T>.setEventValue(value: T) {
+    setValue(Event(value))
+}

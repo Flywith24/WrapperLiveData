@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.flywith24.wrapperlivedatademo.common.Event
+import com.flywith24.wrapperlivedatademo.common.setEventValue
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             val normalValue = mSharedViewModel.normalContent.value
 
             eventValue?.let { value ->
-                mSharedViewModel.eventContent.value = Event(!value)
+                mSharedViewModel.eventContent.setEventValue(!value)
             }
             normalValue?.let { value ->
                 mSharedViewModel.normalContent.value = !value
