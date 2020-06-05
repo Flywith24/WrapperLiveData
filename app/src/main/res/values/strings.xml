@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">WrapperLiveDataDemo</string>
+    <string name="normal">normal</string>
+    <string name="event">event</string>
+    <string name="request">请求数据</string>
+</resources>
