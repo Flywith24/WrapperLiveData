@@ -1,4 +1,4 @@
-package com.flywith24.wrapperlivedatademo.common
+package com.flywith24.wrapperlivedata
 
 /**
  * @author Flywith24

@@ -1,10 +1,9 @@
 package com.flywith24.wrapperlivedatademo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.flywith24.wrapperlivedatademo.common.Event
-import com.flywith24.wrapperlivedatademo.common.setEventValue
+import androidx.appcompat.app.AppCompatActivity
+import com.flywith24.wrapperlivedata.setEventValue
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**

@@ -1,6 +1,5 @@
-package com.flywith24.wrapperlivedatademo.common
+package com.flywith24.wrapperlivedata
 
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelStore
 
 /**

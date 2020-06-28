@@ -2,8 +2,6 @@ package com.flywith24.wrapperlivedatademo
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.flywith24.wrapperlivedatademo.common.Event
-import com.flywith24.wrapperlivedatademo.common.EventMutableLiveData
 
 /**
  * @author Flywith24
@@ -28,7 +26,12 @@ class SharedViewModel : ViewModel() {
      * https://juejin.im/post/5b2b1b2cf265da5952314b63#heading-7
      */
     //等价于 MutableLiveData<Event<Boolean>>(Event(false))
-    val eventContent = EventMutableLiveData<Boolean>(Event(false))
+    val eventContent =
+        com.flywith24.wrapperlivedata.EventMutableLiveData<Boolean>(
+            com.flywith24.wrapperlivedata.Event(
+                false
+            )
+        )
 
     /**
      * 正常的使用，用于对比

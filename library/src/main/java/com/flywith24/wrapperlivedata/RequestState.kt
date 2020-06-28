@@ -1,7 +1,4 @@
-package com.flywith24.wrapperlivedatademo.common
-
-import androidx.lifecycle.LiveData
-import java.lang.Exception
+package com.flywith24.wrapperlivedata
 
 /**
  * @author Flywith24

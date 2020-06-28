@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import com.flywith24.wrapperlivedatademo.common.observeSingleEvent
-import com.flywith24.wrapperlivedatademo.common.observeState
+import com.flywith24.wrapperlivedata.observeSingleEvent
+import com.flywith24.wrapperlivedata.observeState
 import kotlinx.android.synthetic.main.fragment_content.*
 
 /**
