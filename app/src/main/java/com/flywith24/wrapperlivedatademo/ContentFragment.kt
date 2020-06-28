@@ -35,28 +35,31 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
         }
-        mSharedViewModel.eventContent.observeSingleEvent(viewLifecycleOwner,viewModelStore) { value ->
+        mSharedViewModel.eventContent.observeSingleEvent(
+            viewLifecycleOwner,
+            viewModelStore
+        ) { value ->
             event.isChecked = value
             Log.i("yyz11", "ContentFragment eventContent $value")
             val toast = Toast.makeText(requireContext(), "event value $value", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.BOTTOM, 0, 0)
             toast.show()
         }
-
-        mContentViewModel.data.observeState(viewLifecycleOwner,
+        mContentViewModel.data.observeState(viewLifecycleOwner) {
             onLading = {
                 //loading
                 progress.visibility = View.VISIBLE
-            },
+            }
             onSuccess = { data ->
                 //success
                 progress.visibility = View.GONE
                 content.text = data
-            },
+            }
             onError = { exception ->
                 //error
                 progress.visibility = View.GONE
                 Log.e("ContentFragment", "error ${exception?.message}")
-            })
+            }
+        }
     }
 }
