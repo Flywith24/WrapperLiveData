@@ -1,3 +1,33 @@
+## 引入
+[![](https://www.jitpack.io/v/Flywith24/WrapperLiveDataDemo.svg)](https://www.jitpack.io/#Flywith24/WrapperLiveDataDemo)
+
+1. 在项目根目录的 `build.gradle` 加入
+
+   ``` groovy
+   allprojects {
+     repositories {
+       //...
+       maven { url 'https://jitpack.io' }
+     }
+   }
+   ```
+
+   
+
+2. 添加依赖
+
+   ``` groovy
+   dependencies {
+	  implementation 'com.github.Flywith24:WrapperLiveDataDemo:$version'
+	}
+   ```
+
+## Release
+
+- 1.0.1：修复 onLoading 不执行的问题
+
+  
+
 ## 关于 LiveData 两个常用的姿势
 
 ### 使用包装类传递事件
