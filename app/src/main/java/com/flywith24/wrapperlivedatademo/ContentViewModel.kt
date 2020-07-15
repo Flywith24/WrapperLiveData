@@ -2,6 +2,9 @@ package com.flywith24.wrapperlivedatademo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.flywith24.wrapperlivedata.RequestState
+import com.flywith24.wrapperlivedata.StatefulMutableLiveData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -12,13 +15,13 @@ import kotlinx.coroutines.launch
  * description
  */
 class ContentViewModel : ViewModel() {
-    val data = com.flywith24.wrapperlivedata.StatefulMutableLiveData<String>()
+    val data = StatefulMutableLiveData<String>()
 
     fun requestData() {
-        viewModelScope.launch {
-            data.value = com.flywith24.wrapperlivedata.RequestState.Loading
+        viewModelScope.launch(Dispatchers.Main) {
+            data.value = RequestState.Loading
             delay(2000)
-            data.value = com.flywith24.wrapperlivedata.RequestState.Success("success")
+            data.value = RequestState.Success("success")
         }
     }
 }
