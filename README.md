@@ -18,11 +18,13 @@
 
    ``` groovy
    dependencies {
-	  implementation 'com.github.Flywith24:WrapperLiveDataDemo:$version'
+	  implementation 'com.github.Flywith24:WrapperLiveDataDemo:1.0.2'
 	}
    ```
 
 ## Release
+
+- 1.0.2：支持单个事件仅被唯一订阅者消费
 
 - 1.0.1：修复 onLoading 不执行的问题
 
