@@ -35,16 +35,19 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
         }
+        // 每个观察者[viewModelStore]仅能消费一次事件
+        // 如果想让事件仅能被一个观察者消费，则不传入 [viewModelStore] 参数
         mSharedViewModel.eventContent.observeSingleEvent(
             viewLifecycleOwner,
             viewModelStore
         ) { value ->
             event.isChecked = value
-            Log.i("yyz11", "ContentFragment eventContent $value")
+            Log.i(TAG, "ContentFragment eventContent $value")
             val toast = Toast.makeText(requireContext(), "event value $value", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.BOTTOM, 0, 0)
             toast.show()
         }
+
         mContentViewModel.data.observeState(viewLifecycleOwner) {
             onLading = {
                 //loading
@@ -58,8 +61,12 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
             onError = { exception ->
                 //error
                 progress.visibility = View.GONE
-                Log.e("ContentFragment", "error ${exception?.message}")
+                Log.e(TAG, "error ${exception?.message}")
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "ContentFragment"
     }
 }

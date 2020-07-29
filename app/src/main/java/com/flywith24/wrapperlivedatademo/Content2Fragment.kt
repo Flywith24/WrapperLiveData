@@ -19,8 +19,14 @@ class Content2Fragment : Fragment(R.layout.fragment_content2) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mSharedViewModel.eventContent.observeSingleEvent(viewLifecycleOwner,viewModelStore) {
-            Log.i("yyz11", "Content2Fragment eventContent $it")
+        // 每个观察者[viewModelStore]仅能消费一次事件
+        // 如果想让事件仅能被一个观察者消费，则不传入 [viewModelStore] 参数
+        mSharedViewModel.eventContent.observeSingleEvent(viewLifecycleOwner, viewModelStore) {
+            Log.i(TAG, "Content2Fragment eventContent $it")
         }
+    }
+
+    companion object {
+        private const val TAG = "Content2Fragment"
     }
 }
