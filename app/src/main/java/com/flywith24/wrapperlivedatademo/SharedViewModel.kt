@@ -2,6 +2,9 @@ package com.flywith24.wrapperlivedatademo
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * @author Flywith24
@@ -37,4 +40,13 @@ class SharedViewModel : ViewModel() {
      * 正常的使用，用于对比
      */
     val normalContent = MutableLiveData<Boolean>(false)
+
+    private val _state = MutableStateFlow(false) // private mutable state flow
+    val stateContent: StateFlow<Boolean> get() = _state // publicly exposed as read-only state flow
+
+    @ExperimentalCoroutinesApi
+    fun resetState(boolean: Boolean) {
+        _state.value = boolean
+    }
+
 }

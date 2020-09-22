@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
-import com.flywith24.wrapperlivedata.observeSingleEvent
 import com.flywith24.wrapperlivedata.observeState
 import kotlinx.android.synthetic.main.fragment_content.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * @author Flywith24
@@ -37,16 +39,16 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
         }
         // 每个观察者[viewModelStore]仅能消费一次事件
         // 如果想让事件仅能被一个观察者消费，则不传入 [viewModelStore] 参数
-        mSharedViewModel.eventContent.observeSingleEvent(
-            viewLifecycleOwner,
-            viewModelStore
-        ) { value ->
-            event.isChecked = value
-            Log.i(TAG, "ContentFragment eventContent $value")
-            val toast = Toast.makeText(requireContext(), "event value $value", Toast.LENGTH_SHORT)
-            toast.setGravity(Gravity.BOTTOM, 0, 0)
-            toast.show()
-        }
+        /* mSharedViewModel.eventContent.observeSingleEvent(
+             viewLifecycleOwner,
+             viewModelStore
+         ) { value ->
+             event.isChecked = value
+             Log.i(TAG, "ContentFragment eventContent $value")
+             val toast = Toast.makeText(requireContext(), "event value $value", Toast.LENGTH_SHORT)
+             toast.setGravity(Gravity.BOTTOM, 0, 0)
+             toast.show()
+         }*/
 
         mContentViewModel.data.observeState(viewLifecycleOwner) {
             onLading = {
@@ -62,6 +64,16 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
                 //error
                 progress.visibility = View.GONE
                 Log.e(TAG, "error ${exception?.message}")
+            }
+        }
+        lifecycleScope.launch {
+            mSharedViewModel.stateContent.collect { value ->
+                event.isChecked = value
+                Log.i(TAG, "ContentFragment eventContent $value")
+                val toast =
+                    Toast.makeText(requireContext(), "event value $value", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.BOTTOM, 0, 0)
+                toast.show()
             }
         }
     }
